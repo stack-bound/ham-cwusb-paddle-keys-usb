@@ -1,6 +1,6 @@
 [Unit]
 Description=Map HAM CWUSB paddle adapter buttons to keyboard keys for VBand
-Documentation=https://github.com/silverark/paddlekeys
+Documentation=https://github.com/stack-bound/ham-cwusb-paddle-keys-usb
 # Started by udev when the adapter (USB 34bf:ff0b) appears and stopped when
 # it goes away; see 80-paddlekeys.rules. Not enabled at boot on its own.
 BindsTo=dev-paddlekeys.device

@@ -18,7 +18,7 @@ clicks from the desktop, and turns each paddle press into a key press.
 ### Debian / Ubuntu / Mint / Raspberry Pi OS
 
 Download the `.deb` for your CPU from the
-[latest release](https://github.com/silverark/paddlekeys/releases/latest)
+[latest release](https://github.com/stack-bound/ham-cwusb-paddle-keys-usb/releases/latest)
 (`amd64` for a normal PC, `arm64` for a 64-bit Raspberry Pi, `armv7` for 32-bit) and:
 
 ```
@@ -67,8 +67,8 @@ means being in the `input` group and adding one udev rule; see
 Needs Go 1.22 or newer.
 
 ```
-git clone https://github.com/silverark/paddlekeys
-cd paddlekeys
+git clone https://github.com/stack-bound/ham-cwusb-paddle-keys-usb
+cd ham-cwusb-paddle-keys-usb
 make build        # produces ./paddlekeys
 ./paddlekeys -v
 ```

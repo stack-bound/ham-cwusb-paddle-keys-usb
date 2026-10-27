@@ -44,7 +44,7 @@ nfpms:
     package_name: paddlekeys
     file_name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}{{ if .Arm }}v{{ .Arm }}{{ end }}"
     vendor: Silverark
-    homepage: https://github.com/silverark/paddlekeys
+    homepage: https://github.com/stack-bound/ham-cwusb-paddle-keys-usb
     maintainer: Matt Nelson <matt.nelson@silverark.co.uk>
     description: |-
       Maps the HAM CWUSB morse paddle adapter's mouse buttons to keyboard keys
@@ -92,9 +92,7 @@ changelog:
       - "^chore:"
 
 release:
-  github:
-    owner: silverark
-    name: paddlekeys
+  # Owner/name are inferred from GITHUB_REPOSITORY in Actions.
   draft: false
   prerelease: auto
   header: |
