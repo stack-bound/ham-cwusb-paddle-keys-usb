@@ -1,0 +1,32 @@
+[Unit]
+Description=Map HAM CWUSB paddle adapter buttons to keyboard keys for VBand
+Documentation=https://github.com/silverark/paddlekeys
+# Started by udev when the adapter (USB 34bf:ff0b) appears and stopped when
+# it goes away; see 80-paddlekeys.rules. Not enabled at boot on its own.
+BindsTo=dev-paddlekeys.device
+After=dev-paddlekeys.device
+
+[Service]
+Type=simple
+EnvironmentFile=-/etc/default/paddlekeys
+ExecStart=/usr/bin/paddlekeys
+Restart=on-failure
+RestartSec=2
+
+# Run as a throwaway unprivileged user that can only touch input devices.
+DynamicUser=yes
+SupplementaryGroups=input
+DevicePolicy=closed
+DeviceAllow=char-input rw
+DeviceAllow=/dev/uinput rw
+NoNewPrivileges=yes
+ProtectSystem=strict
+ProtectHome=yes
+ProtectKernelTunables=yes
+ProtectKernelModules=yes
+ProtectControlGroups=yes
+RestrictAddressFamilies=AF_UNIX
+RestrictNamespaces=yes
+LockPersonality=yes
+MemoryDenyWriteExecute=yes
+SystemCallArchitectures=native

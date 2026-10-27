@@ -1,0 +1,104 @@
+# goreleaser configuration. Releases are driven by git tags of the form
+# v<VERSION> (created by `clog release` from the VERSION file).
+version: 2
+
+project_name: paddlekeys
+
+before:
+  hooks:
+    - go vet ./...
+
+builds:
+  - id: paddlekeys
+    main: .
+    binary: paddlekeys
+    env:
+      - CGO_ENABLED=0
+    goos:
+      - linux
+    goarch:
+      - amd64
+      - arm64
+      - arm
+    goarm:
+      - "7"
+    ldflags:
+      - -s -w -X main.version={{ .Version }}
+    mod_timestamp: "{{ .CommitTimestamp }}"
+
+archives:
+  # Tarballs with README etc.
+  - id: tarball
+    formats: [tar.gz]
+    name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}{{ if .Arm }}v{{ .Arm }}{{ end }}"
+    files:
+      - README.md
+      - packaging/*
+  # Bare binaries for people who just want to download and run.
+  - id: binary
+    formats: [binary]
+    name_template: "{{ .ProjectName }}_{{ .Os }}_{{ .Arch }}{{ if .Arm }}v{{ .Arm }}{{ end }}"
+
+nfpms:
+  - id: packages
+    package_name: paddlekeys
+    file_name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}{{ if .Arm }}v{{ .Arm }}{{ end }}"
+    vendor: Silverark
+    homepage: https://github.com/silverark/paddlekeys
+    maintainer: Matt Nelson <matt.nelson@silverark.co.uk>
+    description: |-
+      Maps the HAM CWUSB morse paddle adapter's mouse buttons to keyboard keys
+      so it can drive VBand. Starts automatically when the adapter is plugged in.
+    license: MIT
+    formats:
+      - deb
+      - rpm
+      - archlinux
+    bindir: /usr/bin
+    section: hamradio
+    priority: optional
+    dependencies:
+      - udev
+    recommends:
+      - systemd
+    contents:
+      - src: packaging/paddlekeys.service
+        dst: /usr/lib/systemd/system/paddlekeys.service
+      - src: packaging/80-paddlekeys.rules
+        dst: /usr/lib/udev/rules.d/80-paddlekeys.rules
+      - src: packaging/paddlekeys.default
+        dst: /etc/default/paddlekeys
+        type: config|noreplace
+      - src: README.md
+        dst: /usr/share/doc/paddlekeys/README.md
+    scripts:
+      postinstall: packaging/postinstall.sh
+      preremove: packaging/preremove.sh
+      postremove: packaging/postremove.sh
+
+checksum:
+  name_template: checksums.txt
+
+snapshot:
+  version_template: "{{ incpatch .Version }}-next"
+
+changelog:
+  # CHANGELOG.md is maintained by clog; keep goreleaser's own notes short.
+  use: git
+  sort: asc
+  filters:
+    exclude:
+      - "^docs:"
+      - "^chore:"
+
+release:
+  github:
+    owner: silverark
+    name: paddlekeys
+  draft: false
+  prerelease: auto
+  header: |
+    See CHANGELOG.md for the full list of changes.
+
+    **Install:** `.deb` for Debian/Ubuntu, `.rpm` for Fedora/openSUSE, `.pkg.tar.zst` for Arch,
+    or grab the bare `paddlekeys_linux_<arch>` binary and run it by hand.

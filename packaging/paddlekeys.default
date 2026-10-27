@@ -1,0 +1,25 @@
+# Configuration for the paddlekeys service (/etc/default/paddlekeys).
+# Lines are KEY=value. After editing, run:  sudo systemctl restart paddlekeys
+# Run `paddlekeys -list-keys` for the key names accepted below.
+
+# Key sent for the left paddle (default: [ )
+#PADDLEKEYS_LEFT=[
+
+# Key sent for the right paddle (default: ] )
+#PADDLEKEYS_RIGHT=]
+
+# Swap left and right paddles (yes/no)
+#PADDLEKEYS_SWAP=no
+
+# Key sent for a middle button, if your adapter has one (default: none)
+#PADDLEKEYS_MIDDLE=
+
+# Log every paddle press to the journal (yes/no)
+#PADDLEKEYS_VERBOSE=no
+
+# Device selection. Normally auto-detected; override only for a different
+# adapter. USB_ID is vendor:product in hex, MATCH is a substring of the
+# input device name, DEVICE is an explicit /dev/input/eventN path.
+#PADDLEKEYS_USB_ID=34bf:ff0b
+#PADDLEKEYS_MATCH=CWUSB
+#PADDLEKEYS_DEVICE=
