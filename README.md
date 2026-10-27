@@ -184,6 +184,13 @@ from you. Running the binary by hand needs:
 
   then `sudo udevadm control --reload && sudo udevadm trigger`.
 
+## Chipset CH552G
+
+If your board uses the CH552G chipset you may be able to flash it. See this excellent project. 
+
+[morselink-alt](https://github.com/albinger/morselink-alt)
+
+
 ## Windows and macOS
 
 paddlekeys is Linux-only: it relies on the Linux kernel's evdev and uinput
