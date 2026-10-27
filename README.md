@@ -203,18 +203,6 @@ go vet ./...
 ./paddlekeys -monitor -v     # watch raw events without changing anything
 ```
 
-Project layout:
-
-- `main.go`: the whole program. Talks to evdev and uinput directly via
-  ioctls; the only dependency is `golang.org/x/sys`.
-- `packaging/`: systemd unit, udev rules, default config and the
-  install/remove scripts that go into the packages.
-- `.goreleaser.yaml`: builds amd64/arm64/armv7 binaries, tarballs, `.deb`,
-  `.rpm` and Arch packages.
-- `.github/workflows/ci.yml`: vet, build, package snapshot and a
-  smoke-install of the `.deb` on every push.
-- `.github/workflows/release.yml`: publishes a GitHub release on `v*` tags.
-
 ### Releasing
 
 The version lives in the `VERSION` file. `clog release` merges the
@@ -227,3 +215,29 @@ builds everything and attaches it to a GitHub release.
 clog release
 git push --follow-tags
 ```
+
+## Which adapter is this?
+
+The adapter is sold on Amazon and AliExpress under many different brand
+names, but it is the same device: a small box with a USB plug and a 3.5mm
+jack for a paddle, which shows up as USB ID `34bf:ff0b` with the name
+"HAM CWUSB". If your listing looks like one of these, paddlekeys should
+work with it:
+
+- **Sxhlseller** Morse Code Practice Adapter for VBand CW Software, USB Key Trainer with 3.5mm Jack
+  ([B0GR1SPBV2](https://www.amazon.co.uk/dp/B0GR1SPBV2))
+- **Topiky** Morse Code Training Adapter USB Key Trainer, Morse Code Practice Adapter Support for VBand CW Software
+  ([B0GN2L2WRF](https://www.amazon.co.uk/dp/B0GN2L2WRF))
+- **SEAFRONT** Morse Code Key Trainer Adapter, USB Key Training Adapter for VBand CW Software Oscillator
+  ([B0GJTN6D8K](https://www.amazon.co.uk/dp/B0GJTN6D8K))
+- **Pinafresa** CW Key Trainer PC+Vband Morse Code Trainer Type-C/USB Code Trainer
+  ([B0GSW23K67](https://www.amazon.co.uk/dp/B0GSW23K67))
+
+Other search terms that turn up the same thing: "VBand adapter", "VBand USB
+key trainer", "Morse code practice adapter", "CW USB key adapter",
+"HAM CWUSB", "morse paddle to USB". The adapter is not made by
+[VBand](https://hamradio.solutions/vband/); it is a generic clone that
+emulates a USB mouse.
+
+If you have one under a different name, run `lsusb | grep 34bf` to check
+it's the same hardware, and open an issue so it can be added here.
