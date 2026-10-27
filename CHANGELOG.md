@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.0.0] - 2026-10-27
+### Added
+- Initial Application built
+
 # Notes
 [Deployment] Notes for deployment
 [Added] for new features.
