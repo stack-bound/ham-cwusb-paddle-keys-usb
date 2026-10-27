@@ -15,6 +15,18 @@ clicks from the desktop, and turns each paddle press into a key press.
 
 ## Install
 
+One line, any supported distro:
+
+```
+curl -fsSL https://raw.githubusercontent.com/stack-bound/ham-cwusb-paddle-keys-usb/master/install.sh | sh
+```
+
+It detects your CPU and package manager, downloads the matching `.deb`,
+`.rpm` or Arch package from the latest release, verifies the checksum and
+installs it with `sudo`. On other distros it installs the binary, systemd
+unit and udev rule from the tarball. Set `PADDLEKEYS_VERSION=v1.0.0` to pin a
+version. Prefer to do it by hand? Read on.
+
 ### Debian / Ubuntu / Mint / Raspberry Pi OS
 
 Download the `.deb` for your CPU from the
