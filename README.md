@@ -1,5 +1,8 @@
 # paddlekeys
 
+IMPORTANT: I actually got mine to work by holding the paddle keys together when plugging it in.  This switched it to keyboard mode which works with vband. I'll leave this project here in case someone can't get their version to switch! 
+
+
 Makes the cheap **"HAM CWUSB"** morse paddle USB adapter (USB ID `34bf:ff0b`)
 work with [VBand](https://hamradio.solutions/vband/) on Linux.
 
